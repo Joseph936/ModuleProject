@@ -1,4 +1,4 @@
-package cn.clp.alogin
+package cn.clp.login
 
 import org.junit.Test
 

@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -33,6 +36,11 @@ dependencies {
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation project(path: ':Common')
+    implementation project(path: ':BaseProject')
+    implementation project(path: ':MineModule')
+    implementation project(path: ':MainModule')
+    implementation project(path: ':ALogin')
 }
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
