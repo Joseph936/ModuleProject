@@ -3,7 +3,6 @@ package cn.clp.baseproject.baseView
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,23 +10,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import cn.clp.baseproject.R
-import cn.clp.baseproject.baseModel.BaseInterface
-import cn.clp.baseproject.databinding.ActivityBaseBinding
-import kotlinx.android.synthetic.main.activity_base.view.*
+import cn.clp.baseproject.baseViewModel.BaseInterface
+import cn.clp.baseproject.baseViewModel.BaseViewModel
+import cn.clp.baseproject.databinding.LayoutBaseViewBinding
 
 abstract class BaseActivity : AppCompatActivity(), BaseInterface {
-    private lateinit var baseViewBinding: ActivityBaseBinding;
+    private lateinit var baseViewBinding: LayoutBaseViewBinding;
+    private lateinit var baseViewModel: BaseViewModel
+    lateinit var childViewBinding: ViewDataBinding;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        baseViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_base)
+        baseViewBinding = DataBindingUtil.setContentView(this, R.layout.layout_base_view)
         setChildContentView(this, getLayoutId())
         initView()
         initData()
     }
 
     private fun setChildContentView(context: Context, layoutId: Int) {
-        var childViewDataBinding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, this.baseViewBinding.viewContent, false)
-        var childView: View = childViewDataBinding.root;
+        childViewBinding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, this.baseViewBinding.viewContent, false)
+        var childView: View = childViewBinding.root;
         var lp: ViewGroup.LayoutParams = childView.layoutParams
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT
         lp.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -47,6 +48,9 @@ abstract class BaseActivity : AppCompatActivity(), BaseInterface {
     }
 
     override fun initData() {
+        baseViewModel = BaseViewModel();
+        baseViewModel.registerBaseViewModel(this, baseViewBinding)
+        baseViewModel.initData()
     }
 
     override fun onNewIntent(intent: Intent?) {

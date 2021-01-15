@@ -1,4 +1,4 @@
-package cn.clp.baseproject.baseModel
+package cn.clp.baseproject.baseViewModel
 
 interface BaseInterface {
     fun initView()

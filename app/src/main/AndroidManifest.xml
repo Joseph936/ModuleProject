@@ -3,6 +3,7 @@
     package="cn.clp.moduleproject">
 
     <application
+        android:name=".application.ModuleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity
-            android:name="cn.clp.login.SplashActivity"
+            android:name="cn.clp.login.views.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme.Transparent">
@@ -20,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="cn.clp.login.views.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Activity.Theme.Transparent" />
+        <activity
+            android:name=".views.HomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Activity.Theme.Transparent" />
     </application>
 
 </manifest>
