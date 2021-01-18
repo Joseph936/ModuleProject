@@ -1,18 +1,25 @@
 package cn.clp.baseproject.baseViewModel
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.databinding.BaseObservable
-import cn.clp.baseproject.databinding.LayoutBaseViewBinding
+import androidx.databinding.ViewDataBinding
 
-open class BaseViewModel : BaseObservable() {
-    lateinit var baseViewBinding: LayoutBaseViewBinding
-    lateinit var context: Context
+open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable() {
+    protected var context: Context? = null
+    private var viewDataBinding: V? = null
+    open fun initData() {}
 
-    fun registerBaseViewModel(context: Context, baseViewBinding: LayoutBaseViewBinding) {
+    open fun registerViewModel(context: Context, viewDataBinding: V) {
         this.context = context
-        this.baseViewBinding = baseViewBinding
-        baseViewBinding.baseViewModel = this
+        this.viewDataBinding = viewDataBinding
     }
 
-    open fun initData() {}
+    fun finish() {
+        if (context!!.let { it is AppCompatActivity }) {
+            var activity = context as AppCompatActivity
+            activity.finish()
+        }
+    }
 }

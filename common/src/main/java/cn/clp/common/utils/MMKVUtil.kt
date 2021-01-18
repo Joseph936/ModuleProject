@@ -4,11 +4,11 @@ import com.tencent.mmkv.MMKV
 
 class MMKVUtil {
     companion object {
-        val USER_ACCOUNT: String = "user_account"
-        val USER_PASSWORD: String = "user_password"
-        val LOGIN_STATUS: String = "login_status"
+        const val USER_ACCOUNT: String = "user_account"
+        const val USER_PASSWORD: String = "user_password"
+        const val LOGIN_STATUS: String = "login_status"
 
-        var kv: MMKV = MMKV.defaultMMKV()!!
+        private var kv: MMKV = MMKV.defaultMMKV()!!
 
         fun putKVString(key: String, value: String): Unit {
             kv.encode(key, value)
@@ -44,7 +44,7 @@ class MMKVUtil {
         }
 
         fun getKVBoolean(key: String, defaultBoolean: Boolean): Boolean {
-          return  kv.decodeBool(key, defaultBoolean)
+            return kv.decodeBool(key, defaultBoolean)
         }
 
         fun getKVBoolean(key: String): Boolean {

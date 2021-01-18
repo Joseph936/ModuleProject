@@ -9,7 +9,7 @@ import cn.clp.login.databinding.ActivityLoginBinding
 import cn.clp.login.viewModel.LoginViewModel
 import cn.clp.common.utils.MMKVUtil.Companion as MMKVUtil1
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     companion object {
         fun startLoginActivity(context: Context) {
             var intent = Intent(context, LoginActivity::class.java)
@@ -17,9 +17,7 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private lateinit var loginViewModel: LoginViewModel
-    private lateinit var loginBinding: ActivityLoginBinding
-
+    private var loginViewModel: LoginViewModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         clearLoginStatus()
@@ -29,15 +27,18 @@ class LoginActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
+    override fun getViewModel(): LoginViewModel? {
+        loginViewModel = LoginViewModel()
+        return loginViewModel
+    }
+
     override fun initView() {
         super.initView()
-        loginBinding = childViewBinding as ActivityLoginBinding
     }
 
     override fun initData() {
         super.initData()
-        loginViewModel = LoginViewModel()
-        loginViewModel.registerViewModel(loginBinding)
+        loginViewModel!!.let { it.initData() }
     }
 
     /**
