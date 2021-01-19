@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -17,6 +18,11 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
     }
@@ -43,6 +49,8 @@ dependencies {
 
 
     implementation project(path: ':BaseProject')
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
     implementation project(path: ':MineModule')
     implementation project(path: ':MainModule')
     implementation project(path: ':ALogin')

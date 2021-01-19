@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import cn.clp.baseproject.baseView.BaseActivity
+import cn.clp.baseproject.config.ARouterConfig
 import cn.clp.login.R
 import cn.clp.login.databinding.ActivityLoginBinding
 import cn.clp.login.viewModel.LoginViewModel
+import com.alibaba.android.arouter.facade.annotation.Route
 import cn.clp.common.utils.MMKVUtil.Companion as MMKVUtil1
 
+@Route(path = ARouterConfig.LOGIN_ACTIVITY_PATH)
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     companion object {
         fun startLoginActivity(context: Context) {

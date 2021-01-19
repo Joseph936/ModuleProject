@@ -38,6 +38,7 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
             MMKVUtil.putKVString(MMKVUtil.USER_ACCOUNT, userAccount)
             MMKVUtil.putKVString(MMKVUtil.USER_PASSWORD, userPassword)
             ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
+            MMKVUtil.putKVBoolean(MMKVUtil.LOGIN_STATUS, true)
             finish()
         }
     }

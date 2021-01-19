@@ -6,7 +6,7 @@
             android:name="cn.clp.login.views.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Activity.Theme.Transparent">
+            android:theme="@style/Activity.Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

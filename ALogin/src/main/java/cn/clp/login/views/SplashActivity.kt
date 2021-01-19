@@ -1,29 +1,34 @@
 package cn.clp.login.views
 
-import cn.clp.baseproject.baseView.BaseActivity
-import cn.clp.login.R
-import cn.clp.login.databinding.ActivitySplashBinding
-import cn.clp.login.viewModel.SplashViewModel
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import cn.clp.baseproject.config.ARouterConfig
+import cn.clp.common.utils.MMKVUtil
+import com.alibaba.android.arouter.launcher.ARouter
 
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
-    private var viewModel: SplashViewModel? = null
-    override fun getLayoutId(): Int {
-        return R.layout.activity_splash
-    }
-
-    override fun getViewModel(): SplashViewModel? {
-        viewModel = SplashViewModel()
-        return viewModel
-    }
-
-    override fun initView() {
-        super.initView()
+class SplashActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //起始页不调用setContent()方法，节约加载时间
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel!!.let { it.goToHomeActivity() }
+        goToHomeActivity()
     }
 
+    /**
+     * 跳转到home 页
+     */
+    private fun goToHomeActivity() {
+        var isLogin: Boolean = MMKVUtil.getKVBoolean(MMKVUtil.LOGIN_STATUS)
+        if (isLogin) {
+            ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
+            finish()
+        } else {
+            LoginActivity.startLoginActivity(this)
+            finish()
+        }
+    }
 
 }
