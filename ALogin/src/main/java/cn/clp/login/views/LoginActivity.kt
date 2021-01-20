@@ -31,7 +31,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     override fun getViewModel(): LoginViewModel? {
-        loginViewModel = LoginViewModel()
+        if (loginViewModel == null) {
+            loginViewModel = LoginViewModel()
+        }
         return loginViewModel
     }
 
@@ -41,7 +43,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initData() {
         super.initData()
-        loginViewModel!!.let { it.initData() }
     }
 
     /**

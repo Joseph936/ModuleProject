@@ -6,17 +6,36 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.BaseObservable
 import androidx.databinding.ViewDataBinding
 
-open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable() {
-    protected var context: Context? = null
+open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseInterface {
+    private var context: Context? = null
     private var viewDataBinding: V? = null
-    open fun initData() {}
 
-    open fun registerViewModel(context: Context, viewDataBinding: V) {
+    fun registerViewModel(context: Context, viewDataBinding: V) {
         this.context = context
         this.viewDataBinding = viewDataBinding
+        initView()
+        initData()
     }
 
-    fun finish() {
+    override fun initView() {
+    }
+
+    override fun initData() {
+        initListener()
+    }
+
+    override fun initListener() {
+    }
+
+    protected fun getContext(): Context {
+        return context!!
+    }
+
+    protected fun getViewDataBinding(): V? {
+        return viewDataBinding
+    }
+
+    protected fun finish() {
         if (context!!.let { it is AppCompatActivity }) {
             var activity = context as AppCompatActivity
             activity.finish()

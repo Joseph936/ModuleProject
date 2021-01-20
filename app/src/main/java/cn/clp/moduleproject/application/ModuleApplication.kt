@@ -7,5 +7,6 @@ class ModuleApplication : BaseApplication() {
         super.onCreate()
         initMMKV(this)
         initARouter(this)
+        initAutoSize()
     }
 }

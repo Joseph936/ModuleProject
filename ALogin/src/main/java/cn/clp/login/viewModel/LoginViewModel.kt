@@ -13,22 +13,15 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.mmkv.MMKV
 
 class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
-    private var loginBinding: ActivityLoginBinding? = null
-    override fun registerViewModel(context: Context, logginBinding: ActivityLoginBinding) {
-        super.registerViewModel(context, logginBinding)
-        this.loginBinding = logginBinding
-        logginBinding!!.let { it.loginViewModel = this }
-    }
-
     override fun initData() {
         super.initData()
-        loginBinding!!.let { it.edtAccount.setText(MMKVUtil.getKVString(MMKVUtil.USER_ACCOUNT)) }
+        getViewDataBinding()!!.let { it.edtAccount.setText(MMKVUtil.getKVString(MMKVUtil.USER_ACCOUNT)) }
     }
 
     //登录按钮点击
     fun loginOnclick(view: View) {
-        var userAccount = loginBinding!!.edtAccount.text.toString().trim()
-        var userPassword = loginBinding!!.edtPassword.text.toString().trim()
+        var userAccount = getViewDataBinding()!!.edtAccount.text.toString().trim()
+        var userPassword = getViewDataBinding()!!.edtPassword.text.toString().trim()
 
         if (TextUtils.isEmpty(userAccount)) {
             ToastUtil.ShowToast("请输入账号")
@@ -42,4 +35,5 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
             finish()
         }
     }
+
 }

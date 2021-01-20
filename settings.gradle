@@ -1,3 +1,4 @@
+include ':MessageModule'
 include ':MineModule'
 include ':MainModule'
 include ':ALogin'

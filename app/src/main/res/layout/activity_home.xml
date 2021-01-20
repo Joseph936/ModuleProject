@@ -14,13 +14,24 @@
         android:layout_height="match_parent"
         android:background="@color/color_white">
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/bottom_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_black"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:background="@color/color_white"
-            app:labelVisibilityMode="auto"
+            app:itemIconSize="24dp"
             app:itemTextColor="@color/color_black"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:menu="@menu/menu_bottom_navigation_view">

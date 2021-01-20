@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import cn.clp.baseproject.baseViewModel.BaseInterface
 import cn.clp.baseproject.baseViewModel.BaseViewModel
+import me.jessyan.autosize.internal.CustomAdapt
 
 abstract class BaseActivity<V : ViewDataBinding, T : BaseViewModel<V>> : AppCompatActivity(), BaseInterface {
     private var viewDataBingDing: V? = null
-    private var viewModel: T? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewDataBingDing = DataBindingUtil.setContentView(this, getLayoutId())
@@ -22,14 +22,24 @@ abstract class BaseActivity<V : ViewDataBinding, T : BaseViewModel<V>> : AppComp
     protected abstract fun getLayoutId(): Int;
 
     override fun initView() {
+        viewDataBingDing!!.let {
+            getViewModel()!!.registerViewModel(this, it)
+        }
     }
 
     override fun initData() {
-        viewModel = getViewModel()
-        viewDataBingDing!!.let { viewModel!!.registerViewModel(this, it) }
+        initListener()
     }
 
-    open abstract fun getViewModel(): T?
+    override fun initListener() {
+    }
+
+
+    protected fun getViewDataBinding(): V? {
+        return viewDataBingDing
+    }
+
+    abstract fun getViewModel(): T?
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)

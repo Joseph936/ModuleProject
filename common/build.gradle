@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
@@ -38,5 +39,7 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     api 'com.tencent:mmkv-static:1.2.7'
+
+    api 'me.jessyan:autosize:1.1.2'
 
 }
