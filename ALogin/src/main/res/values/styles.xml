@@ -4,6 +4,6 @@
     <style name="Activity.Theme.Splash" parent="Activity.Theme.Transparent">
         <item name="android:windowFullscreen">true</item>
         <item name="android:statusBarColor">@color/color_transparent</item>
-        <item name="android:windowBackground">@mipmap/splash</item>
+<!--        <item name="android:windowBackground">@mipmap/splash</item>-->
     </style>
 </resources>

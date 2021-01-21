@@ -6,12 +6,12 @@ class ToastUtil {
     companion object {
         private var context = GlobalContextUtil.newInstance().getContext()
         private var toast: Toast? = null
-        public fun ShowToast(content: String) {
-            if (toast == null) {
-                toast = Toast.makeText(context, content, Toast.LENGTH_SHORT)
+        fun showToast(content: String) {
+            toast = if (toast == null) {
+                Toast.makeText(context, content, Toast.LENGTH_SHORT)
             } else {
                 toast!!.cancel()
-                toast = Toast.makeText(context, content, Toast.LENGTH_SHORT)
+                Toast.makeText(context, content, Toast.LENGTH_SHORT)
             }
             toast!!.setText(content)
             toast!!.show()

@@ -6,14 +6,13 @@
     <data>
 
         <variable
-            name="mainViewModel"
-            type="cn.clp.mainmodule.viewModel.MainViewModel" />
+            name="messageViewModel"
+            type="cn.clp.messagemodule.viewModel.MessageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -22,8 +21,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@{mainViewModel.getTextContent}" />
-
-
+            tools:text="@{messageViewModel.getTextContent}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

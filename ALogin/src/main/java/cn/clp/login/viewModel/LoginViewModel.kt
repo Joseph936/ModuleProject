@@ -13,6 +13,10 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.mmkv.MMKV
 
 class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
+    override fun initView() {
+        super.initView()
+        getViewDataBinding()!!.loginViewModel=this
+    }
     override fun initData() {
         super.initData()
         getViewDataBinding()!!.let { it.edtAccount.setText(MMKVUtil.getKVString(MMKVUtil.USER_ACCOUNT)) }
@@ -24,9 +28,9 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
         var userPassword = getViewDataBinding()!!.edtPassword.text.toString().trim()
 
         if (TextUtils.isEmpty(userAccount)) {
-            ToastUtil.ShowToast("请输入账号")
+            ToastUtil.showToast("请输入账号")
         } else if (TextUtils.isEmpty(userPassword)) {
-            ToastUtil.ShowToast("请输入密码")
+            ToastUtil.showToast("请输入密码")
         } else {
             MMKVUtil.putKVString(MMKVUtil.USER_ACCOUNT, userAccount)
             MMKVUtil.putKVString(MMKVUtil.USER_PASSWORD, userPassword)

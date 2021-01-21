@@ -1,13 +1,13 @@
-package cn.clp.mainmodule.viewModel
+package cn.clp.messagemodule.viewModel
 
 import cn.clp.baseproject.baseViewModel.BaseViewModel
-import cn.clp.mainmodule.databinding.FragmentMainViewBinding
+import cn.clp.messagemodule.databinding.FragmentMessageViewBinding
 
-class MainViewModel : BaseViewModel<FragmentMainViewBinding>() {
-    private var textContent = "主页页面"
+class MessageViewModel : BaseViewModel<FragmentMessageViewBinding>() {
+    private var textContent = "消息页面"
     override fun initView() {
         super.initView()
-        getViewDataBinding()!!.mainViewModel = this
+        getViewDataBinding()!!.messageViewModel = this
     }
 
     override fun initData() {
@@ -25,5 +25,4 @@ class MainViewModel : BaseViewModel<FragmentMainViewBinding>() {
     fun getTextContent(): String {
         return textContent!!
     }
-
 }

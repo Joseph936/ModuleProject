@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="mainViewModel"
-            type="cn.clp.mainmodule.viewModel.MainViewModel" />
+            name="mineViewModel"
+            type="cn.clp.minemodule.viewModel.MineViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +22,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@{mainViewModel.getTextContent}" />
-
-
+            tools:text="@{mineViewModel.getTextContent}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

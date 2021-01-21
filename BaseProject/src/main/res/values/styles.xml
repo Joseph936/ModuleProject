@@ -2,7 +2,8 @@
 
     <style name="Activity.Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/color_transparent</item>
-        <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
+        <!-- 全屏 -->
+        <!--        <item name="android:windowFullscreen">true</item>-->
     </style>
 </resources>

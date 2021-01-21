@@ -1,13 +1,13 @@
-package cn.clp.mainmodule.viewModel
+package cn.clp.minemodule.viewModel
 
 import cn.clp.baseproject.baseViewModel.BaseViewModel
-import cn.clp.mainmodule.databinding.FragmentMainViewBinding
+import cn.clp.minemodule.databinding.FragmentMineViewBinding
 
-class MainViewModel : BaseViewModel<FragmentMainViewBinding>() {
-    private var textContent = "主页页面"
+class MineViewModel : BaseViewModel<FragmentMineViewBinding>() {
+    private var textContent = "我的页面"
     override fun initView() {
         super.initView()
-        getViewDataBinding()!!.mainViewModel = this
+        getViewDataBinding()!!.mineViewModel = this
     }
 
     override fun initData() {

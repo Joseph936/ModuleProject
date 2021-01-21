@@ -6,6 +6,7 @@ import cn.clp.moduleproject.databinding.ActivityHomeBinding
 class HomeViewModel : BaseViewModel<ActivityHomeBinding>() {
     override fun initView() {
         super.initView()
+        getViewDataBinding()!!.homeViewModel=this
     }
 
     override fun initData() {

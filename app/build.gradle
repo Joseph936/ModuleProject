@@ -46,6 +46,7 @@ dependencies {
 
     implementation project(path: ':BaseProject')
     kapt 'com.alibaba:arouter-compiler:1.5.1'
+    implementation project(path: ':MessageModule')
     implementation project(path: ':MineModule')
     implementation project(path: ':MainModule')
     implementation project(path: ':ALogin')
