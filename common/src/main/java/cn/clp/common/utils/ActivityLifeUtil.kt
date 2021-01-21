@@ -45,7 +45,7 @@ class ActivityLifeUtil : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityStopped(activity: Activity) {
-        foregroundActivityCount++
+        foregroundActivityCount--
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
@@ -71,6 +71,13 @@ class ActivityLifeUtil : Application.ActivityLifecycleCallbacks {
     }
 
     /**
+     * 当前存活Activity存活数量
+     */
+    fun getActiveActivityCount(): Int {
+        return activityMap.size
+    }
+
+    /**
      * 退出所有activity
      */
     fun clearAllActivity() {
@@ -84,6 +91,7 @@ class ActivityLifeUtil : Application.ActivityLifecycleCallbacks {
      * 重新启动应用
      */
     fun restartApp() {
+        clearAllActivity()
         ToastUtil.showToast("重新启动中...")
         var packageManger = context.packageManager
         val intent = packageManger.getLaunchIntentForPackage(context.packageName)
