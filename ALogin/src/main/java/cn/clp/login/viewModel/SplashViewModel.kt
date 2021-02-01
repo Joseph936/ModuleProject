@@ -18,7 +18,7 @@ class SplashViewModel : BaseViewModel<ActivitySplashBinding>() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             countDown--
-            getViewDataBinding()!!.tvCountDown.text = String.format(getContext().getString(R.string.splash_count_down), countDown)
+            getViewDataBinding()?.tvCountDown?.text = getContext()?.getString(R.string.splash_count_down)?.let { String.format(it, countDown) }
             if (countDown == 0) {
                 showCountDownView(false)
             } else {
@@ -29,7 +29,7 @@ class SplashViewModel : BaseViewModel<ActivitySplashBinding>() {
 
     override fun initView() {
         super.initView()
-        getViewDataBinding()!!.splashViewModel = this
+        getViewDataBinding()?.splashViewModel = this
     }
 
     override fun initData() {
@@ -47,13 +47,13 @@ class SplashViewModel : BaseViewModel<ActivitySplashBinding>() {
 
     private fun showCountDownView(isShow: Boolean) {
         if (isShow) {
-            getViewDataBinding()!!.tvCountDown.visibility = View.VISIBLE
-            getViewDataBinding()!!.tvCountDown.text = String.format(getContext().getString(R.string.splash_count_down), countDown)
+            getViewDataBinding()?.tvCountDown?.visibility = View.VISIBLE
+            getViewDataBinding()?.tvCountDown?.text = getContext()?.getString(R.string.splash_count_down)?.let { String.format(it, countDown) }
             handler.removeCallbacksAndMessages(null)
             handler.sendEmptyMessageDelayed(0, 1000)
         } else {
             handler.removeCallbacksAndMessages(null)
-            getViewDataBinding()!!.tvCountDown.visibility = View.GONE
+            getViewDataBinding()?.tvCountDown?.visibility = View.GONE
             goToHomeActivity()
         }
 
@@ -73,13 +73,13 @@ class SplashViewModel : BaseViewModel<ActivitySplashBinding>() {
      */
     private fun goToHomeActivity() {
         var isLogin: Boolean = MMKVUtil.getKVBoolean(MMKVUtil.LOGIN_STATUS)
-        if (isLogin) {
-            ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
-            finish()
-        } else {
-            LoginActivity.startLoginActivity(getContext())
-            finish()
-        }
+//        if (isLogin) {
+//            ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
+//            finish()
+//        } else {
+        getContext()?.let { LoginActivity.startLoginActivity(it) }
+        finish()
+//        }
     }
 
 }

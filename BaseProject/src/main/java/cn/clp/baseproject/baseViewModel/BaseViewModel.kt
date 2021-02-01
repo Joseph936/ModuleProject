@@ -2,11 +2,13 @@ package cn.clp.baseproject.baseViewModel
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.databinding.BaseObservable
 import androidx.databinding.ViewDataBinding
+import cn.clp.common.utils.Https.HttpUtil
+import cn.clp.common.utils.Https.response.Callback
+import cn.clp.common.utils.Https.response.HttpResponse
 
-open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseInterface {
+open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseInterface, Callback<Any> {
     private var context: Context? = null
     private var viewDataBinding: V? = null
 
@@ -27,8 +29,8 @@ open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseI
     override fun initListener() {
     }
 
-    protected fun getContext(): Context {
-        return context!!
+    protected fun getContext(): Context? {
+        return context
     }
 
     protected fun getViewDataBinding(): V? {
@@ -36,9 +38,29 @@ open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseI
     }
 
     protected fun finish() {
-        if (context!!.let { it is AppCompatActivity }) {
+        if (context.let { it is AppCompatActivity }) {
             var activity = context as AppCompatActivity
             activity.finish()
         }
     }
+
+    fun <T> startGetRequest(params: LinkedHashMap<String, String>, url: String, flag: String) {
+        HttpUtil.newInstance().getRequest<HttpResponse<T>>(url, params).execute(flag, this)
+    }
+
+    override fun onStartRequest(flag: String) {
+        when (flag) {
+        }
+    }
+
+    override fun onSuccessRequest(flag: String, response: HttpResponse<Any>) {
+        when (flag) {
+        }
+    }
+
+    override fun onErrorRequest(flag: String, hasNetWork: Boolean) {
+        when (flag) {
+        }
+    }
+
 }

@@ -2,9 +2,7 @@ package cn.clp.moduleproject.views
 
 import android.content.Context
 import android.content.Intent
-import android.view.Menu
 import android.view.MenuItem
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import cn.clp.baseproject.baseView.BaseActivity
@@ -114,6 +112,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), BottomN
 
     override fun onPageSelected(position: Int) {
         var menu = getViewDataBinding()!!.bottomNavigation.menu.getItem(position)
-        menu.isChecked=true
+        menu.isChecked = true
     }
 }

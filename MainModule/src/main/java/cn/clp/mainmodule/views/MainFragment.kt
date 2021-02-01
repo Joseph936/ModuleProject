@@ -11,7 +11,7 @@ class MainFragment : BaseFragment<FragmentMainViewBinding, MainViewModel>() {
     private var callBack: MainFragmentCallBack? = null
 
     companion object {
-//        fun newInstance(callBack: MainFragmentCallBack): MainFragment {
+        //        fun newInstance(callBack: MainFragmentCallBack): MainFragment {
         fun newInstance(): MainFragment {
             var fragment = MainFragment()
             var bundle = Bundle()
@@ -36,6 +36,7 @@ class MainFragment : BaseFragment<FragmentMainViewBinding, MainViewModel>() {
 
     override fun initView() {
         super.initView()
+        getViewDataBinding()?.tvImageView?.setTextContent("我是大神仙我是大神仙我是大神仙我是大神仙我是大神仙"+"\n"+"我是大神仙我是大神仙我是大神仙")
     }
 
     override fun initData() {
