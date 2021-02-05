@@ -4,9 +4,14 @@ import com.tencent.mmkv.MMKV
 
 class MMKVUtil {
     companion object {
+        const val SCHEME_API: String = "scheme_api"
+
         const val USER_ACCOUNT: String = "user_account"
         const val USER_PASSWORD: String = "user_password"
         const val LOGIN_STATUS: String = "login_status"
+        const val CURRENT_USER_ID: String = "user_id"
+        const val AUTO_TOKEN: String = "auto_token"
+
 
         private var kv: MMKV = MMKV.defaultMMKV()!!
 
@@ -35,12 +40,12 @@ class MMKVUtil {
         }
 
 
-        fun getKVString(key: String): String? {
-            return kv.decodeString(key)
+        fun getKVString(key: String): String {
+            return kv.decodeString(key).toString()
         }
 
-        fun getKVString(key: String, defaultString: String): String? {
-            return kv.decodeString(key, defaultString)
+        fun getKVString(key: String, defaultString: String): String {
+            return kv.decodeString(key, defaultString).toString()
         }
 
         fun getKVBoolean(key: String, defaultBoolean: Boolean): Boolean {

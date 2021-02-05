@@ -1,4 +1,4 @@
-package cn.clp.baseproject.utils
+package cn.clp.common.utils
 
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -6,19 +6,7 @@ import kotlin.experimental.and
 
 class Md5Util {
     companion object {
-        const val MD5_KEY = "yg4#dFJLuBQqp31L"
         val digit = charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F')
-        fun createMd5Code(code: String): String? {
-            var stringBuilder = StringBuilder()
-            stringBuilder.append(code)
-
-            var stamp = System.currentTimeMillis() / 1000
-            var timeStamp = (stamp xor stamp / 1000000) * 2
-            stringBuilder.append(timeStamp)
-            stringBuilder.append(MD5_KEY)
-            return MD5(stringBuilder.toString())
-        }
-
         fun MD5(source: String?): String? {
             return try {
 //               val temp = (source ?: "").toByteArray(charset("UTF-8"))

@@ -2,10 +2,15 @@ package cn.clp.baseproject.application
 
 import android.app.Activity
 import android.app.Application
+import android.os.Build
 import android.util.Log
+import cn.clp.baseproject.config.HttpConfig
 import cn.clp.common.configs.AppConfig
 import cn.clp.common.utils.ActivityLifeUtil
+import cn.clp.common.utils.DeviceUtil
 import cn.clp.common.utils.GlobalContextUtil
+import cn.clp.common.utils.Https.HttpUtil
+import cn.clp.common.utils.Https.model.HttpHeaders
 import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.mmkv.MMKV
 import me.jessyan.autosize.AutoSizeConfig
@@ -20,6 +25,20 @@ abstract class BaseApplication : Application(), onAdaptListener {
         initMMKV()
         initARouter()
         initAutoSize()
+        initHttpUtil()
+    }
+
+    private fun initHttpUtil() {
+        var httpHeader = HttpHeaders()
+        var appVersion = packageManager.getPackageInfo(packageName, 0)
+        httpHeader.put(HttpConfig.HEAD_KEY_APP_VERSION, appVersion.versionName)
+        httpHeader.put(HttpConfig.HEAD_KEY_DEVICE, "2")//1:ios  2：Android 3：wap
+        httpHeader.put(HttpConfig.HEAD_KEY_DEVICE_NAME, DeviceUtil.getDeviceName())
+        DeviceUtil.getUniqueId()?.let { httpHeader.put(HttpConfig.HEAD_KEY_DEVICE_IMEI, it) }
+        httpHeader.put(HttpConfig.HEAD_KEY_OS_VERSION, Build.VERSION.RELEASE)
+        httpHeader.put(HttpConfig.HEAD_KEY_BUNDLE_ID, packageName)
+        httpHeader.put(HttpConfig.HEAD_KEY_APPID, "6")
+        HttpUtil.newInstance().initHttpHeader(httpHeader)
     }
 
     /**

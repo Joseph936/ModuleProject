@@ -1,10 +1,11 @@
 package cn.clp.common.utils.Https.request
 
+import okhttp3.HttpUrl
 import okhttp3.Request
 
-class GetRequest<T> : NoBodyRequest<T>() {
+class GetRequest<T>(url: String) : NoBodyRequest<T,GetRequest<T>>(url) {
     override fun createUrl(): String? {
-        return getCommonParams()?.let {
+        return getHttpParams()?.let {
             createUrlFromParams(it)
             return url
         }

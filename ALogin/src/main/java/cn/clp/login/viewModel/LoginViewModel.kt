@@ -5,7 +5,10 @@ import android.view.View
 import cn.clp.baseproject.baseModel.NetConfigFlag
 import cn.clp.baseproject.baseViewModel.BaseViewModel
 import cn.clp.baseproject.config.ARouterConfig
-import cn.clp.baseproject.utils.Md5Util
+import cn.clp.baseproject.utils.AppUtil
+import cn.clp.common.configs.AppConfig
+import cn.clp.common.utils.Md5Util
+import cn.clp.common.utils.Https.HttpUtil
 import cn.clp.common.utils.Https.response.HttpResponse
 import cn.clp.common.utils.MMKVUtil
 import cn.clp.common.utils.ToastUtil
@@ -34,12 +37,15 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
 //        } else if (TextUtils.isEmpty(mobileSign)) {
 //            ToastUtil.showToast("请输入验证码")
         } else {
-            var url = "http://119.3.227.184:8010/user/mobile/code/new";
-            var params = LinkedHashMap<String, String>()
-            params["mobile"] = mobile
-            var sign = Md5Util.createMd5Code(mobile)
-            params["sign"] = sign.toString()
-            startGetRequest<LoginModel>(params, url, NetConfigFlag.LOGIN_CODE)
+            var url = "http://119.3.227.184:8010";
+            var sign = AppUtil.createMd5Code(mobile)
+
+            var param = LinkedHashMap<String, String>()
+            param["mobile"] = mobile
+            param["sign"] = sign.toString()
+            startPostRequest<LoginModel>(AppConfig.LOGIN_API, param, NetConfigFlag.LOGIN_CODE)
+
+//            startGetRequest<LoginModel>(params, url, NetConfigFlag.LOGIN_CODE)
 //            MMKVUtil.putKVString(MMKVUtil.USER_ACCOUNT, userAccount)
 //            MMKVUtil.putKVString(MMKVUtil.USER_PASSWORD, userPassword)
         }
@@ -54,7 +60,7 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
         }
     }
 
-    override fun onSuccessRequest(flag: String, response: HttpResponse<Any>) {
+    override fun <T:Any> onSuccessRequest(flag: String, response: HttpResponse<T>) {
         super.onSuccessRequest(flag, response)
         when (flag) {
             NetConfigFlag.LOGIN_CODE -> {

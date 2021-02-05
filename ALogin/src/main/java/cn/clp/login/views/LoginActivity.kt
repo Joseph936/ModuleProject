@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import cn.clp.baseproject.baseView.BaseActivity
 import cn.clp.baseproject.config.ARouterConfig
+import cn.clp.login.Product2Consumer
 import cn.clp.login.R
 import cn.clp.login.databinding.ActivityLoginBinding
 import cn.clp.login.viewModel.LoginViewModel
@@ -43,6 +44,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initData() {
         super.initData()
+
+        var model = Product2Consumer()
+        var productThread1=Product2Consumer.Producer(model)
+        var productThread2=Product2Consumer.Producer(model)
+        var consumerThread=Product2Consumer.Consumer(model)
+
+        productThread1.start()
+        productThread2.start()
+        consumerThread.start()
+
     }
 
     /**

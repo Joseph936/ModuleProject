@@ -1,22 +1,21 @@
 package cn.clp.common.utils.Https.request
 
 import okhttp3.Request
-import okhttp3.RequestBody
 
-class PostRequest<T> : BodyRequest<T>() {
+class PostRequest<T>(url: String) : BodyRequest<T,PostRequest<T>>(url) {
     override fun createUrl(): String? {
+        if (isSpliceUrl) {
+            return getHttpParams()?.let {
+                createUrlFromParams(it)
+            }
+        }
         return url
-
-//        return getCommonParams()?.let {
-//            createUrlFromParams(it)
-//            return url
-//        }
     }
 
     override fun createRequest(): Request? {
         var requestBody = createRequestBody()
         var requestBuilder = createRequestBuilder()
-        requestBuilder = requestBuilder?.post(requestBody)
+        requestBuilder = requestBody?.let { requestBuilder?.post(it) }
         requestBuilder = createUrl()?.let {
             requestBuilder?.url(it)
         }

@@ -23,6 +23,6 @@ class MessageViewModel : BaseViewModel<FragmentMessageViewBinding>() {
     }
 
     fun getTextContent(): String {
-        return textContent!!
+        return textContent
     }
 }

@@ -23,7 +23,7 @@ class MineViewModel : BaseViewModel<FragmentMineViewBinding>() {
     }
 
     fun getTextContent(): String {
-        return textContent!!
+        return textContent
     }
 
 }

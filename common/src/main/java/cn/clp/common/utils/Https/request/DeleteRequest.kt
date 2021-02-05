@@ -2,7 +2,7 @@ package cn.clp.common.utils.Https.request
 
 import okhttp3.Request
 
-class DeleteRequest<T> :BaseRequest<T,DeleteRequest<T>>(){
+class DeleteRequest<T>(url:String) :BaseRequest<T,DeleteRequest<T>>(url){
     override fun createUrl(): String? {
         TODO("Not yet implemented")
     }

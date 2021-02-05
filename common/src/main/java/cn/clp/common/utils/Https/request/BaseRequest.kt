@@ -19,7 +19,7 @@ import java.net.URLEncoder
 import java.util.*
 
 
-abstract class BaseRequest<T, R> : RequestInterface {
+abstract class BaseRequest<T, R : BaseRequest<T, R>>(url: String) : RequestInterface {
     private var context = GlobalContextUtil.newInstance().getContext()
     private var acceptLanguage: String? = null
     private var httpHeaders: HttpHeaders? = null
@@ -27,16 +27,8 @@ abstract class BaseRequest<T, R> : RequestInterface {
     private var executed = false
     private var retryCount = 0
     private var currentRetryCount = 0
-    protected var url: String? = null
+    protected var url = url
     protected var tag: String? = null
-
-    enum class MethodType(type: String) {
-        GET("GET"),
-        POST("POST"),
-        PUT("PUT"),
-        DELETE("DELETE"),
-        PATCH("PATCH");
-    }
 
     init {
         httpHeaders = HttpHeaders()
@@ -53,38 +45,48 @@ abstract class BaseRequest<T, R> : RequestInterface {
         this.acceptLanguage = acceptLanguage
     }
 
-    fun addCommonParam(key: String, value: String): BaseRequest<T, R> {
+    fun addUrlParam(key: String, value: String): R {
         httpParams?.put(key, value)
-        return this
+        return this as R
     }
 
-    fun addCommonParams(httpParams: HttpParams): BaseRequest<T, R> {
+    fun addUrlParam(urlParamsMap: LinkedHashMap<String, String>): R {
+        httpParams?.putAll(urlParamsMap)
+        return this as R
+    }
+
+    fun addHttpParams(httpParams: HttpParams): R {
         this.httpParams = httpParams
-        return this
+        return this as R
     }
 
-    fun addCommonParam(key: String, value: HttpParams.FileWrapper): BaseRequest<T, R> {
+    fun addFileParam(key: String, value: HttpParams.FileWrapper): R {
         httpParams?.put(key, value)
-        return this
+        return this as R
     }
 
-    fun addCommonParam(key: String, value: List<HttpParams.FileWrapper>): BaseRequest<T, R> {
+    fun addFileParam(key: String, value: List<HttpParams.FileWrapper>): R {
         httpParams?.put(key, value)
-        return this
+        return this as R
     }
 
-    fun getCommonParams(): HttpParams? {
+    fun addFileParam(fileParamsMap: LinkedHashMap<String, List<HttpParams.FileWrapper>>): R {
+        httpParams?.putAllFile(fileParamsMap)
+        return this as R
+    }
+
+    fun getHttpParams(): HttpParams? {
         return httpParams;
     }
 
-    fun addHeader(key: String, value: String): BaseRequest<T, R> {
+    fun addHeader(key: String, value: String): R {
         httpHeaders?.put(key, value)
-        return this
+        return this as R
     }
 
-    fun addHeaders(httpHeaders: HttpHeaders): BaseRequest<T, R> {
+    open fun addHeaders(httpHeaders: HttpHeaders?): R {
         this.httpHeaders = httpHeaders
-        return this
+        return this as R
     }
 
     fun getHeaders(): HttpHeaders? {
@@ -104,14 +106,9 @@ abstract class BaseRequest<T, R> : RequestInterface {
         return acceptLanguage
     }
 
-    fun setUrl(url: String): BaseRequest<T, R> {
-        this.url = url
-        return this
-    }
-
-    fun setRetryCount(retryCount: Int): BaseRequest<T, R> {
+    fun setRetryCount(retryCount: Int): R {
         this.retryCount = retryCount
-        return this
+        return this as R
     }
 
     fun createUrlFromParams(realHttpParams: HttpParams): String? {
@@ -149,20 +146,21 @@ abstract class BaseRequest<T, R> : RequestInterface {
         return headerBuilder
     }
 
-    fun <T> execute(flag: String, callBack: Callback<T>) {
+    fun <T:Any> execute(flag: String, callBack: Callback) {
         this.tag = flag
         var call = createRequest()?.let { HttpUtil.newInstance().getOkHttpClient()?.newCall(it) }
         call?.enqueue(object : okhttp3.Callback {
             override fun onFailure(call: Call, e: IOException) {
                 if (currentRetryCount < retryCount) {
-                    execute(flag, callBack)
+                    execute<T>(flag, callBack)
                     currentRetryCount++
                 } else {
                     callBack.onErrorRequest(flag, isNetworkConnected())
                 }
             }
+
             override fun onResponse(call: Call, response: Response) {
-                callBack.convertResponse(flag, response)
+                callBack.convertResponse<T>(flag, response)
             }
         })
     }

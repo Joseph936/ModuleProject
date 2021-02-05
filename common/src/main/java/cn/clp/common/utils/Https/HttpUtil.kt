@@ -1,23 +1,17 @@
 package cn.clp.common.utils.Https
 
-import android.text.TextUtils
-import android.util.Log
 import cn.clp.common.utils.GlobalContextUtil
 import cn.clp.common.utils.Https.interceptors.LoggingInterceptor
-import cn.clp.common.utils.Https.model.HttpParams
+import cn.clp.common.utils.Https.model.HttpHeaders
 import cn.clp.common.utils.Https.request.*
-import cn.clp.common.utils.Https.response.Callback
-import cn.clp.common.utils.Https.response.HttpResponse
-import okhttp3.Call
 import okhttp3.OkHttpClient
-import okhttp3.Response
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 class HttpUtil : HttpRequestInterface {
     private var context = GlobalContextUtil.newInstance().getContext()
     private var okHttpClient: OkHttpClient? = null
     private val DEFAULT_MILLISECONDS: Long = 60;      //默认的超时时间
+    private var httpHeader: HttpHeaders? = null
 
     companion object {
         fun newInstance(): HttpUtil {
@@ -44,6 +38,10 @@ class HttpUtil : HttpRequestInterface {
         return okHttpClient
     }
 
+    fun initHttpHeader(httpHeader: HttpHeaders) {
+        this.httpHeader = httpHeader
+    }
+
     private fun getOkHttpBuilder(): OkHttpClient.Builder {
         var builder = OkHttpClient.Builder()
         var interceptor = getLoggingInterceptor()
@@ -61,18 +59,12 @@ class HttpUtil : HttpRequestInterface {
         return interceptor
     }
 
-    fun <T> getRequest(url: String, params: LinkedHashMap<String, String>, retryCount: Int): BaseRequest<T, GetRequest<T>> {
-        var httpParams = HttpParams()
-        httpParams.putAll(params)
-        return GetRequest<T>().setUrl(url).setRetryCount(retryCount).addCommonParams(httpParams)
+    fun <T> getRequest(url: String): NoBodyRequest<T, GetRequest<T>>? {
+        return GetRequest<T>(url).addHeaders(httpHeader)
     }
 
-    fun <T> getRequest(url: String, params: LinkedHashMap<String, String>): BaseRequest<T, GetRequest<T>> {
-        return getRequest(url, params, 0)
-    }
-
-    fun <T> postRequest(): BaseRequest<T, PostRequest<T>> {
-        TODO("Not yet implemented")
+    fun <T> postRequest(url: String): BodyRequest<T, PostRequest<T>>? {
+        return PostRequest<T>(url).addHeaders(httpHeader)
     }
 
     fun <T> deleteRequest(): BaseRequest<T, DeleteRequest<T>> {

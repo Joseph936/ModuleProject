@@ -23,7 +23,7 @@ class MainViewModel : BaseViewModel<FragmentMainViewBinding>() {
     }
 
     fun getTextContent(): String {
-        return textContent!!
+        return textContent
     }
 
 }
