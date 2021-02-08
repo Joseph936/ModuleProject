@@ -22,7 +22,7 @@ class LoginViewModel : BaseViewModel<ActivityLoginBinding>() {
 
     override fun initData() {
         super.initData()
-        getViewDataBinding()?.let { it.edtMobile.setText(MMKVUtil.getKVString(MMKVUtil.USER_ACCOUNT)) }
+        getViewDataBinding()?.let { it.edtMobile.setText(MMKVUtil.getKVString(MMKVUtil.USER_ACCOUNT,"")) }
     }
 
     //登录按钮点击

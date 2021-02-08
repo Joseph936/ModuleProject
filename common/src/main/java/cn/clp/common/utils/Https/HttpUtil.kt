@@ -67,16 +67,16 @@ class HttpUtil : HttpRequestInterface {
         return PostRequest<T>(url).addHeaders(httpHeader)
     }
 
-    fun <T> deleteRequest(): BaseRequest<T, DeleteRequest<T>> {
-        TODO("Not yet implemented")
+    fun <T> deleteRequest(url: String): BodyRequest<T, DeleteRequest<T>>? {
+        return DeleteRequest<T>(url).addHeaders(httpHeader)
     }
 
-    fun <T> putRequest(): BaseRequest<T, PutRequest<T>> {
-        TODO("Not yet implemented")
+    fun <T> putRequest(url: String): BodyRequest<T, PutRequest<T>>? {
+        return PutRequest<T>(url).addHeaders(httpHeader)
     }
 
-    fun <T> patchRequest(): BaseRequest<T, PatchRequest<T>> {
-        TODO("Not yet implemented")
+    fun <T> patchRequest(url: String): BodyRequest<T, PatchRequest<T>>? {
+        return PatchRequest<T>(url).addHeaders(httpHeader)
     }
 
     /**
