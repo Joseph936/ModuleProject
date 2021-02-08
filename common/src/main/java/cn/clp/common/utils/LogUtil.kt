@@ -12,9 +12,21 @@ class LogUtil {
             }
         }
 
+        fun v(tag: String, message: String) {
+            if (!RequestConfig.IS_RELEASE) {
+                Log.v(tag, message)
+            }
+        }
+
         fun d(message: String) {
             if (!RequestConfig.IS_RELEASE) {
                 Log.d(TAG, message)
+            }
+        }
+
+        fun d(tag: String, message: String) {
+            if (!RequestConfig.IS_RELEASE) {
+                Log.d(tag, message)
             }
         }
 
@@ -24,15 +36,33 @@ class LogUtil {
             }
         }
 
+        fun i(tag: String, message: String) {
+            if (!RequestConfig.IS_RELEASE) {
+                Log.i(tag, message)
+            }
+        }
+
         fun w(message: String) {
             if (!RequestConfig.IS_RELEASE) {
                 Log.w(TAG, message)
             }
         }
 
+        fun w(tag: String, message: String) {
+            if (!RequestConfig.IS_RELEASE) {
+                Log.w(tag, message)
+            }
+        }
+
         fun e(message: String) {
             if (!RequestConfig.IS_RELEASE) {
                 Log.e(TAG, message)
+            }
+        }
+
+        fun e(tag: String, message: String) {
+            if (!RequestConfig.IS_RELEASE) {
+                Log.e(tag, message)
             }
         }
     }

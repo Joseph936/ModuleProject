@@ -2,7 +2,7 @@ package cn.clp.common.utils.Https
 
 import cn.clp.common.utils.GlobalContextUtil
 import cn.clp.common.utils.Https.interceptors.LoggingInterceptor
-import cn.clp.common.utils.Https.model.HttpHeaders
+import cn.clp.common.utils.Https.response.HttpHeaders
 import cn.clp.common.utils.Https.request.*
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit

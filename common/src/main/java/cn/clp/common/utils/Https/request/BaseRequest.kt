@@ -8,8 +8,8 @@ import android.text.TextUtils
 import android.webkit.WebView
 import cn.clp.common.utils.GlobalContextUtil
 import cn.clp.common.utils.Https.HttpUtil
-import cn.clp.common.utils.Https.model.HttpHeaders
-import cn.clp.common.utils.Https.model.HttpParams
+import cn.clp.common.utils.Https.response.HttpHeaders
+import cn.clp.common.utils.Https.response.HttpParams
 import cn.clp.common.utils.Https.response.Callback
 import okhttp3.Call
 import okhttp3.Headers

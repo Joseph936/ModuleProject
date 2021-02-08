@@ -8,7 +8,7 @@ import cn.clp.baseproject.config.HttpConfig
 import cn.clp.common.configs.AppConfig
 import cn.clp.common.utils.Https.HttpUtil
 import cn.clp.common.utils.Https.response.Callback
-import cn.clp.common.utils.Https.response.HttpResponse
+import cn.clp.common.utils.Https.model.HttpResponse
 import cn.clp.common.utils.MMKVUtil
 
 open abstract class BaseViewModel<V : ViewDataBinding> : BaseObservable(), BaseInterface, Callback {

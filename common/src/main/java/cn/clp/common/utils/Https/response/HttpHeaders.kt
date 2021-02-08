@@ -1,4 +1,4 @@
-package cn.clp.common.utils.Https.model
+package cn.clp.common.utils.Https.response
 
 /**
  * 请求头信息

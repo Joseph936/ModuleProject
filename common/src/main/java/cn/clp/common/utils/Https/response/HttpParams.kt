@@ -1,4 +1,4 @@
-package cn.clp.common.utils.Https.model
+package cn.clp.common.utils.Https.response
 
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

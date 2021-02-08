@@ -73,13 +73,13 @@ class SplashViewModel : BaseViewModel<ActivitySplashBinding>() {
      */
     private fun goToHomeActivity() {
         var isLogin: Boolean = MMKVUtil.getKVBoolean(MMKVUtil.LOGIN_STATUS)
-//        if (isLogin) {
-//            ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
-//            finish()
-//        } else {
-        getContext()?.let { LoginActivity.startLoginActivity(it) }
-        finish()
-//        }
+        if (isLogin) {
+            ARouter.getInstance().build(ARouterConfig.HOME_ACTIVITY_PATH).navigation()
+            finish()
+        } else {
+            getContext()?.let { LoginActivity.startLoginActivity(it) }
+            finish()
+        }
     }
 
 }

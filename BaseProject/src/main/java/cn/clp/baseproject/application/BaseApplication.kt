@@ -10,7 +10,7 @@ import cn.clp.common.utils.ActivityLifeUtil
 import cn.clp.common.utils.DeviceUtil
 import cn.clp.common.utils.GlobalContextUtil
 import cn.clp.common.utils.Https.HttpUtil
-import cn.clp.common.utils.Https.model.HttpHeaders
+import cn.clp.common.utils.Https.response.HttpHeaders
 import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.mmkv.MMKV
 import me.jessyan.autosize.AutoSizeConfig

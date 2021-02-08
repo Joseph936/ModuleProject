@@ -1,12 +1,10 @@
 package cn.clp.common.utils.Https.request
 
-import cn.clp.common.utils.Https.model.HttpHeaders
 import okhttp3.FormBody
 import okhttp3.MultipartBody
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.net.URLEncoder
 
 abstract class BodyRequest<T,R:BodyRequest<T,R>>(url: String) : BaseRequest<T, BodyRequest<T,R>>(url) {
     private var isMultipart = false//是否强制使用 multipart/form-data 表单上传
